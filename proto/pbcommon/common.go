@@ -87,6 +87,94 @@ func (q *QueryOptions) SetFilter(filter string) {
 	q.Filter = filter
 }
 
+// GetMaxQueryTime is required to implement blockingQueryOptions
+func (m *QueryOptions) GetMaxQueryTime() time.Duration {
+	if m != nil {
+		return m.MaxQueryTime
+	}
+	return 0
+}
+
+// GetMinQueryIndex is required to implement blockingQueryOptions
+func (m *QueryOptions) GetMinQueryIndex() uint64 {
+	if m != nil {
+		return m.MinQueryIndex
+	}
+	return 0
+}
+
+// GetRequireConsistent is required to implement blockingQueryOptions
+func (m *QueryOptions) GetRequireConsistent() bool {
+	if m != nil {
+		return m.RequireConsistent
+	}
+	return false
+}
+
+// GetToken is required to implement blockingQueryOptions
+func (m *QueryOptions) GetToken() string {
+	if m != nil {
+		return m.Token
+	}
+	return ""
+}
+
+// GetAllowStale is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetAllowStale() bool {
+	if m != nil {
+		return m.AllowStale
+	}
+	return false
+}
+
+// GetFilter is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetFilter() string {
+	if m != nil {
+		return m.Filter
+	}
+	return ""
+}
+
+// GetResultsFilteredByACLs is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetMaxAge() time.Duration {
+	if m != nil {
+		return m.MaxAge
+	}
+	return 0
+}
+
+// GetMaxStaleDuration is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetMaxStaleDuration() time.Duration {
+	if m != nil {
+		return m.MaxStaleDuration
+	}
+	return 0
+}
+
+// GetMustRevalidate is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetMustRevalidate() bool {
+	if m != nil {
+		return m.MustRevalidate
+	}
+	return false
+}
+
+// GetStaleIfError is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetStaleIfError() time.Duration {
+	if m != nil {
+		return m.StaleIfError
+	}
+	return 0
+}
+
+// GetUseCache is required to implement structs.QueryOptionsCompat
+func (m *QueryOptions) GetUseCache() bool {
+	if m != nil {
+		return m.UseCache
+	}
+	return false
+}
+
 // SetLastContact is needed to implement the structs.QueryMetaCompat interface
 func (q *QueryMeta) SetLastContact(lastContact time.Duration) {
 	q.LastContact = lastContact
@@ -109,6 +197,51 @@ func (q *QueryMeta) SetConsistencyLevel(consistencyLevel string) {
 
 func (q *QueryMeta) GetBackend() structs.QueryBackend {
 	return structs.QueryBackend(0)
+}
+
+// SetResultsFilteredByACLs is needed to implement the structs.QueryMetaCompat interface
+func (q *QueryMeta) SetResultsFilteredByACLs(v bool) {
+	q.ResultsFilteredByACLs = v
+}
+
+// GetIndex is required to implement blockingQueryResponseMeta
+func (m *QueryMeta) GetIndex() uint64 {
+	if m != nil {
+		return m.Index
+	}
+	return 0
+}
+
+// GetConsistencyLevel is required to implement structs.QueryMetaCompat
+func (m *QueryMeta) GetConsistencyLevel() string {
+	if m != nil {
+		return m.ConsistencyLevel
+	}
+	return ""
+}
+
+// GetKnownLeader is required to implement structs.QueryMetaCompat
+func (m *QueryMeta) GetKnownLeader() bool {
+	if m != nil {
+		return m.KnownLeader
+	}
+	return false
+}
+
+// GetLastContact is required to implement structs.QueryMetaCompat
+func (m *QueryMeta) GetLastContact() time.Duration {
+	if m != nil {
+		return m.LastContact
+	}
+	return 0
+}
+
+// GetResultsFilteredByACLs is required to implement structs.QueryMetaCompat
+func (m *QueryMeta) GetResultsFilteredByACLs() bool {
+	if m != nil {
+		return m.ResultsFilteredByACLs
+	}
+	return false
 }
 
 // WriteRequest only applies to writes, always false
